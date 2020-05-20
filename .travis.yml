@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - 11
+
+services:
+  - docker
+
+install:
+  - echo "No installations necessasry"
+
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version
+  - docker build -t simplicitydevs/ionic-front .
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "simplicitydevs" --password-stdin
+  - docker push simplicitydevs/ionic-front
